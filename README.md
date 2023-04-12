@@ -1,5 +1,9 @@
 # found-it
 
+## About this website
+LostIt its a website for teachers, students and people related to Medellin University.
+The main functionality of this project its to allow the user to search for their lost objects, which they have lost within the university.
+
 ## Build Setup
 
 ```bash

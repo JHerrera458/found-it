@@ -2,7 +2,7 @@
   <v-app dark>
     <v-main>
       <v-app-bar absolute>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon />
         <v-toolbar-title> <v-icon>mdi-alpha-l-box</v-icon> Lost It </v-toolbar-title>
       </v-app-bar>
       <v-container>
@@ -14,6 +14,6 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
+  name: 'DefaultLayout'
 }
 </script>

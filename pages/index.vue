@@ -10,17 +10,27 @@
             <h1>Inicia sesión</h1>
           </v-card-title>
           <v-card-text>
-            <v-form v-model="formLoginAccount" ref="formLoginAccount"></v-form>
+            <v-form ref="formLoginAccount" v-model="formLoginAccount" />
             <v-text-field v-model="email" name="email" label="Correo electrónico" outlined prepend-icon="mdi-email" />
-            <v-text-field @click:append="visiblePass = !visiblePass"
-              :append-icon="visiblePass ? 'mdi-eye' : 'mdi-eye-off'" v-model="password"
-              :type="visiblePass ? 'text' : 'password'" name="password" label="Contraseña" outlined
-              prepend-icon="mdi-lock" />
+            <v-text-field
+              v-model="password"
+              :append-icon="visiblePass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="visiblePass ? 'text' : 'password'"
+              name="password"
+              label="Contraseña"
+              outlined
+              prepend-icon="mdi-lock"
+              @click:append="visiblePass = !visiblePass"
+            />
           </v-card-text>
           <v-card-actions>
-            <v-btn dark class="customBtn" color="#03396c" @click="loginAccount()" :loading="loading">Iniciar
-              sesión</v-btn>
-            <v-btn dark class="customBtn" color="#005b96" @click="dialog = !dialog">Crear una cuenta</v-btn>
+            <v-btn dark class="customBtn" color="#03396c" :loading="loading" @click="loginAccount()">
+              Iniciar
+              sesión
+            </v-btn>
+            <v-btn dark class="customBtn" color="#005b96" @click="dialog = !dialog">
+              Crear una cuenta
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -31,24 +41,57 @@
           Crea una cuenta nueva
         </v-card-title>
         <v-card-text>
-          <v-form v-model="formCreateAccount" ref="formCreateAccount">
-            <v-text-field v-model="registerInfo.name" :rules="[rules.required]" name="name" label="Nombre" outlined
-              prepend-icon="mdi-account" />
-            <v-text-field v-model="registerInfo.lastName" :rules="[rules.required]" name="lastName" label="Apellido"
-              outlined prepend-icon="mdi-account" />
-            <v-text-field v-model="registerInfo.phoneNumber" :rules="[rules.required]" name="number"
-              label="Número de celular" outlined prepend-icon="mdi-phone" />
-            <v-text-field v-model="registerInfo.email" :rules="[rules.required, rules.email]" name="email"
-              label="Correo electrónico" outlined prepend-icon="mdi-email" />
-            <v-text-field @click:append="visiblePass = !visiblePass"
-              :append-icon="visiblePass ? 'mdi-eye' : 'mdi-eye-off'" v-model="registerInfo.password"
-              :type="visiblePass ? 'text' : 'password'" :rules="[rules.required]" name="password" label="Contraseña"
-              outlined prepend-icon="mdi-lock" />
+          <v-form ref="formCreateAccount" v-model="formCreateAccount">
+            <v-text-field
+              v-model="registerInfo.name"
+              :rules="[rules.required]"
+              name="name"
+              label="Nombre"
+              outlined
+              prepend-icon="mdi-account"
+            />
+            <v-text-field
+              v-model="registerInfo.lastName"
+              :rules="[rules.required]"
+              name="lastName"
+              label="Apellido"
+              outlined
+              prepend-icon="mdi-account"
+            />
+            <v-text-field
+              v-model="registerInfo.phoneNumber"
+              :rules="[rules.required]"
+              name="number"
+              label="Número de celular"
+              outlined
+              prepend-icon="mdi-phone"
+            />
+            <v-text-field
+              v-model="registerInfo.email"
+              :rules="[rules.required, rules.email]"
+              name="email"
+              label="Correo electrónico"
+              outlined
+              prepend-icon="mdi-email"
+            />
+            <v-text-field
+              v-model="registerInfo.password"
+              :append-icon="visiblePass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="visiblePass ? 'text' : 'password'"
+              :rules="[rules.required]"
+              name="password"
+              label="Contraseña"
+              outlined
+              prepend-icon="mdi-lock"
+              @click:append="visiblePass = !visiblePass"
+            />
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn dark color="#005b96" @click="createAccount()" :loading="loading">Crear una cuenta</v-btn>
+          <v-spacer />
+          <v-btn dark color="#005b96" :loading="loading" @click="createAccount()">
+            Crear una cuenta
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -58,7 +101,7 @@
 <script>
 export default {
   layout: 'blank',
-  data() {
+  data () {
     return {
       accountExist: false,
       loading: false,
@@ -66,44 +109,44 @@ export default {
       formLoginAccount: null,
       visiblePass: false,
       dialog: false,
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       registerInfo: {
-        name: "",
-        lastName: "",
-        phoneNumber: "",
-        email: "",
-        password: "",
+        name: '',
+        lastName: '',
+        phoneNumber: '',
+        email: '',
+        password: '',
         role: 0,
         createDate: new Date()
       },
       rules: {
-        required: (value) => !!value || 'Este campo es obligatorio',
+        required: value => !!value || 'Este campo es obligatorio',
         email: (value) => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Ingresa un email válido'
-        },
+        }
       }
     }
   },
   methods: {
-    async validateAccountExistance() {
+    async validateAccountExistance () {
       const url = `${process.env.URL_DEV}/accounts`
       await this.$axios.get(url).then((response) => {
         const data = response.data
-        const found = data.find(account => account.email == this.registerInfo.email)
+        const found = data.find(account => account.email === this.registerInfo.email)
         if (found) {
           this.accountExist = true
         } else {
           this.accountExist = false
         }
-      }).catch((error) => {
+      }).catch(() => {
         this.accountExist = true
       }).finally(() => {
       })
     },
-    async createAccount() {
-      const refFormCreateAccount = this.$refs['formCreateAccount']
+    async createAccount () {
+      const refFormCreateAccount = this.$refs.formCreateAccount
       if (refFormCreateAccount) {
         const formIsValid = refFormCreateAccount.validate()
         if (formIsValid) {
@@ -116,13 +159,13 @@ export default {
           } else {
             this.loading = true
             const url = `${process.env.URL_DEV}/accounts`
-            this.$axios.post(url, this.registerInfo).then((response) => {
+            this.$axios.post(url, this.registerInfo).then(() => {
               this.$swal.fire(
                 'Cuenta creada!',
                 'Exitosamente!',
                 'success'
               )
-            }).catch((error) => {
+            }).catch(() => {
               this.$swal.fire({
                 icon: 'error',
                 title: 'Ocurrió un error creando la cuenta'
@@ -140,31 +183,31 @@ export default {
         }
       }
     },
-    loginAccount() {
+    loginAccount () {
       const url = `${process.env.URL_DEV}/accounts`
       this.loading = true
       this.$axios.get(url).then((response) => {
         const data = response.data
-        const found = data.find(account => account.email == this.email && account.password == this.password)
+        const found = data.find(account => account.email === this.email && account.password === this.password)
         if (found) {
           this.$swal.fire({
             title: 'Iniciaste sesión!',
             text: 'Bienvenido.',
-            icon: 'success',
+            icon: 'success'
           })
           this.$router.push('/user/home')
         } else {
           this.$swal.fire({
             title: 'Error!',
             text: 'Usuario y/o contraseña incorrectos.',
-            icon: 'error',
+            icon: 'error'
           })
         }
-      }).catch((error) => {
+      }).catch(() => {
         this.$swal.fire({
           title: 'Error!',
           text: 'Ha ocurrido un error.',
-          icon: 'error',
+          icon: 'error'
         })
       }).finally(() => {
         this.loading = false

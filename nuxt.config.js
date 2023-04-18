@@ -45,7 +45,7 @@ export default {
     '@nuxtjs/axios',
     'vue-sweetalert2/nuxt'
   ],
-  
+
   sweetalert: {
     confirmButtonColor: '#41b882',
     cancelButtonColor: '#ff7674'

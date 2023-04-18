@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "api-fake": "json-server --watch tmp/api/db.json -p 3001",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -19,6 +20,7 @@
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
+    "vue-sweetalert2": "^5.0.5",
     "vue-template-compiler": "^2.7.10",
     "vuetify": "^2.6.10"
   },

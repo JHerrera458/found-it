@@ -1,0 +1,24 @@
+{
+  "accounts": [
+    {
+      "name": "Julián",
+      "lastName": "Herrera Leal",
+      "phoneNumber": "3015225831",
+      "email": "juliann4567@gmail.com",
+      "password": "12345",
+      "role": 0,
+      "createDate": "2023-04-17T23:37:20.505Z",
+      "id": 1
+    },
+    {
+      "name": "1",
+      "lastName": "1",
+      "phoneNumber": "1",
+      "email": "julianherrera33@gmail.com",
+      "password": "1",
+      "role": 0,
+      "createDate": "2023-04-18T00:50:45.955Z",
+      "id": 2
+    }
+  ]
+}
